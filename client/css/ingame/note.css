@@ -1,0 +1,85 @@
+.noteimg{
+	position: absolute;
+	overflow: hidden;
+	width: 247px;
+	height: 64px;
+	z-index: 3;
+}
+.holdimg{
+	object-fit: fill;
+	position: absolute;
+	/* overflow: hidden; */
+	width: 247px;
+	/* background-repeat: no-repeat;
+	background-position: bottom;
+	background-size: 100% 100%; */
+	z-index: 3;
+	/* clip-path: inset(3600px 0px 0px 0px); */
+}
+.partner_base{
+	width: 100%;
+	position: absolute;
+	top: 20%;
+	z-index: 10;
+	/* border: 1px solid beige; */
+	animation: nonenone;
+	animation-duration: 0.8s;
+	animation-fill-mode: forwards;
+}
+@keyframes partner_base_enter {
+	from{
+		opacity: 0;
+	}to{
+		opacity: 1;
+	}
+}
+@keyframes partner_base_leave {
+	from{
+		opacity: 1;
+	}to{
+		opacity: 0;
+	}
+}
+.partner_bg_img{
+	/* position: absolute; */
+	width: 100%;
+}
+.partner_char_size{
+	position: absolute;
+	top: 18%;
+	width: 100%;
+	height: 46%;
+	overflow: hidden;
+}
+.partner_char_img{
+	position: absolute;
+	left: -18%;
+	top: -320%;
+	width: 140%;
+	height: auto;
+	filter: drop-shadow(-8px 0px rgba(0,0,0,0.6));
+	animation: nonenone;
+	animation-duration: 3s;
+	animation-timing-function: ease-out;
+	animation-fill-mode: forwards;
+}
+@keyframes show_char {
+	0%{
+		left: -18%;
+		filter: drop-shadow(-8px 0px rgba(0,0,0,0.6));
+	}80%{
+		left: -20%;
+		filter: drop-shadow(-28px 0px rgba(0,0,0,0.6));
+	}
+	100%{
+		left: -20%;
+		filter: drop-shadow(-28px 0px rgba(0,0,0,0.6));
+	}
+}
+.partner_skill_img{
+	position: absolute;
+	z-index: 1;
+	width: 13%;
+	bottom: 34%;
+	left: 43.5%;
+}

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html id="html">
+	<head>
+		<meta charset="utf-8" user-scalable="no" />
+		<link rel="stylesheet" type="text/css" href="../css/selectPage.css">
+		<link rel="stylesheet" type="text/css" href="../css/shutter.css">
+		<link rel="stylesheet" type="text/css" href="../css/topbar.css">
+		<link rel="stylesheet" type="text/css" href="../css/elements.css">
+		<script src="../js/screen/transition.js?randomId=<%=Math.random()%"></script>
+        <script src="../js/screen/change.js"></script>
+        <script src="../js/page/selectPageBase.js"></script>
+		<script src="../js/page/selectPageNew.js"></script>
+		<script src="../js/page/topbar.js?"></script>
+		<script src="../js/page/charjson.js"></script>
+		<script src="../js/file/jsonFunc.js"></script>
+		<script src="../js/data/SAPdata.js"></script>
+		<script src="../js/data/language.js"></script>
+		<script src="../js/data/localStorage.js"></script>
+		<script src="../js/page/prompt.js"></script>
+		<script src="../js/page/clickAudio.js"></script>
+		<script src="../js/data/code.js"></script>
+		<script src="../js/data/code_0.js"></script>
+		<script src="../js/data/code_1.js"></script>
+		<script src="../js/data/code_2.js"></script>
+		<script src="../js/data/code_3.js"></script>
+		<script src="../js/data/XMLConnector.js"></script>
+		<script src="../js/page/charShower.js"></script>
+		<script src="../js/scroll/scroll.js"></script>
+		<script src="../js/ingame/delay.js"></script>
+		<title>MusicGame_1.0_selectPage</title>
+	</head>
+	<body id="body"  "return false;" onselectstart="return false" 
+	style="background-image: url('../resources/finish/finish.png');" 
+	onload="shutterResize(0), pageinit(), changeSize('selectPage')" onresize="changeSize('selectPage'), shutterResize(1)"
+	onclick="bodyfirstclicked()">
+		<audio id="bgaudio" src="../resources/audio/bgm_loop.ogg" preload="auto" loop="true"></audio>
+		<audio id="shuttercloseaudio" src="../resources/audio/shutter_close.wav" preload="auto"></audio>
+		<audio id="shutteropenaudio" src="../resources/audio/shutter_open.wav" preload="auto"></audio>
+		<audio id="morepageshow" src="../resources/audio/menu_in.wav" preload="auto"></audio>
+		<audio id="morepageleave" src="../resources/audio/item_cancel.wav" preload="auto"></audio>
+		<div id="remind"></div>
+		<div id="shutter" style="display: none;">
+			<div id="shutter_r">
+				<img id="shutter_r_img" src="../resources/img/shutter_r.png" alt="" draggable="false">
+			</div>
+			<div id="shutter_l">
+				<img id="shutter_l_img" src="../resources/img/shutter_l.png" alt="" draggable="false">
+			</div>
+			<!-- 选歌界面专属 -->
+			<img src="../resources/img/songload_shadow.png" style="display: none;" id="shutter_song_shadow" draggable="false">
+			<div id="shutter_song_msg" style="display: none;">
+				<div id="shutter_songimgS">
+					<img src="../resources/img/song_jacket_back_dark.png" id="shutter_songimgshadow" draggable="false">
+					<img src="../resources/songs/arcahv/base.jpg" id="shutter_songimgimg" draggable="false">
+				</div>
+				<div id="shutter_song_game_data">
+					<div id="shutter_song_game_data_music">
+						<div class="shutter_song_game_data_title">Music</div>
+						<div id="shutter_song_game_data_music_by" class="shutter_song_game_data_content">Cosmograph</div>
+					</div>
+					<div id="shutter_song_game_data_design">
+						<div class="shutter_song_game_data_title">Note Design</div>
+						<div id="shutter_song_game_data_design_by" class="shutter_song_game_data_content">Toaster</div>
+					</div>
+				</div>
+				<div id="shutter_song_name">
+					<div id="shutter_songnameS" class="shutter_songname">Dement~after legend~</div><!-- 音乐名字 底部阴影 -->
+					<div id="shutter_songname" class="shutter_songname">Dement~after legend~</div>
+				</div>
+			</div>
+		</div>
+		<div id="container" style="visibility: hidden;">
+			<div id="topbar">
+				<div id="topbarbg"></div>
+				<div id="onlineGrid">
+					<div id="onlineleft">
+						<div id="playerlevelbg">
+							<div id="playername">SakuraYoimiya</div>
+						</div>
+					</div>
+				</div>
+				<div id="playerScore">
+					<div id="onlinescore">
+						<img src="../resources/img/rating_7.png" alt="" id="onlinerateimg">
+						<div id="ratingtextl">
+							<div id="ratingtextm" class="ratingtext" data-text="13.">13.</div>
+							<div id="ratingtexts" class="ratingtext" data-text="00">00</div>
+						</div>
+					</div>
+				</div>
+                <div id="appname" class="testarea">Arcaea</div>
+				<div id="guestGrid" class="testarea">
+					<div id="guestmain" class="topelementsmain">
+						<div id="status_bg">
+							<div id="guest">GUEST</div>
+						</div>
+					</div>
+				</div>
+				<div id="headerBoederGrid" class="testarea">
+					<div id="headerBoeder" onclick="headerclick()">
+						<div id="header"></div>
+					</div>
+				</div>
+				<div id="settingGrid" class="testarea">
+					<div id="setting" onclick="settingclick()">
+						<div id="settingbg">
+							<div id="settingimg"></div>
+							<div id="settingtext">Settings</div>
+						</div>
+					</div>
+				</div>
+				<div id="fragmentstextGrid" class="testarea">
+					<div id="fragmentstext" class="topbartext">Fragments</div>
+				</div>
+				<div id="fragmentsGrid" class="testarea" onclick="showFragPrompt()">
+					<div id="fragmentsmain" class="topelementsmain">
+						<div id="fragments" class="topelements">
+							<div id="fragmentsbg" class="topbarbg"></div>
+						</div>
+						<img src="../resources/layouts/topbar/fragstack-double.png" alt="" id="fragmentsbga" class="topbarbga">
+						<div id="fragmentsamount" class="topbaramount">343</div>
+					</div>
+				</div>
+				<div id="memoriestextGrid" class="testarea">
+					<div id="memoriestext" class="topbartext">Memories</div>
+				</div>
+				<div id="memoriesGrid" class="testarea" onclick="showMemoPrompt()">
+					<div id="memoriesmain" class="topelementsmain">
+						<div id="memories" class="topelements">
+							<div id="memoriesbg" class="topbarbg"></div>
+						</div>
+						<img src="../resources/layouts/topbar/fragstack-doubleplus.png" alt="" id="memoriesbga" class="topbarbga">
+						<div id="memoriesamount" class="topbaramount">343</div>
+					</div>
+				</div>
+            </div>
+			<div id="settingpage"  style="display: none;">
+				<audio src="../resources/audio/calibrate.ogg" preload="auto" id="delayjudgemusic"></audio>
+				<div id="settingpagebg">
+					<div id="settingbgtop">
+						<div id="settingname">Settings</div>
+					</div>
+					<div id="settingbgcenter">
+						<div id="tabbg">
+							<div id="tablabel">
+								<div id="tablabelplay" class="tablabelelement" onclick="tabelementclick(0)"></div>
+								<div id="tablabelmusic" class="tablabelelement" onclick="tabelementclick(1)"></div>
+								<div id="tablabelshow" class="tablabelelement" onclick="tabelementclick(2)"></div>
+							</div>
+							<div id="tabtolast" class="tabto"></div>
+							<div id="tabtonext" class="tabto"></div>
+						</div>
+						<div id="tabmsg">
+							<div id="pagelabell" class="pagelabel"><img src="../resources/img/dialog_v2/Pagination_on.png" id="labell0" draggable="false"> <img src="../resources/img/dialog_v2/Pagination_off.png" id="labell1" draggable="false"> </div>
+							<div id="pagelabelr" class="pagelabel"><img src="../resources/img/dialog_v2/Pagination_off.png" id="labelr0" draggable="false"> <img src="../resources/img/dialog_v2/Pagination_on.png" id="labelr1" draggable="false"></div>
+							<div id="settingmain0-0" class="settingmain">
+								<div id="tabmsgleft">
+									<div  id="tabmsg_set_sheer_top" class="tabmsg-txt-weight">纯粹 【过早/过晚】</div>
+									<div id="tabmsg_set_sheer_mid" class="tabmsg-txt">开启后会在纯粹(Pure)时显示【过早/过晚】</div>
+									<div id="tabmsg_set_sheer_bot" class="tabmsg-txt-weight tabmsg-txt-shadow" onclick="pureclick()">关闭</div>
+								</div>
+								<div id="tabmsgcenter">
+									<div  id="tabmsg_set_speed_top" class="tabmsg-txt-weight">音符流速</div>
+									<div id="tabmsg_set_speed_mid" class="tabmsg-txt">控制音符的下落速度</div>
+									<div id="tabmsg_set_speed_bot" class="tabmsg-btn-change">
+										<div class="speed-control" id="speed-l"></div>
+ 										<div id="speed" class="setshadow">4</div>
+ 										<div class="speed-control" id="speed-r"></div>
+									</div>
+								</div>
+								<div id="tabmsgright">
+									<div  id="tabmsg_set_skill_top"  class="tabmsg-txt-weight">技能显示</div>
+									<div  id="tabmsg_set_skill_mid" class="tabmsg-txt">在歌曲开始前<br>显示搭档技能</div>
+									<div id="tabmsg_set_skill_bot" class="tabmsg-txt-weight tabmsg-txt-shadow" onclick="skill_displayclick()">开启</div>
+								</div>
+							</div>
+							<div id="settingmain0-1" class="settingmain" >
+								<div id="button_show_div">
+									<div id="selected_button_div">
+										<button class="keyboard_button_selected" id="selected_button0" onclick="set_keyboard_button(0)">A</button>
+										<button class="keyboard_button_selected" id="selected_button1" onclick="set_keyboard_button(1)">S</button>
+										<button class="keyboard_button_selected" id="selected_button2" onclick="set_keyboard_button(2)">C</button>
+										<button class="keyboard_button_selected" id="selected_button3" onclick="set_keyboard_button(3)">N</button>
+										<button class="keyboard_button_selected" id="selected_button4" onclick="set_keyboard_button(4)">K</button>
+										<button class="keyboard_button_selected" id="selected_button5" onclick="set_keyboard_button(5)">L</button>
+									</div>
+									<div id="num_show_div">
+										<div id="num_show_div1" class="num_show_class">0</div>
+										<div id="num_show_div2"class="num_show_class">1</div>
+										<div id="num_show_div3"class="num_show_class">2</div>
+										<div id="num_show_div4"class="num_show_class">3</div>
+										<div id="num_show_div5"class="num_show_class">4</div>
+										<div id="num_show_div6"class="num_show_class">5</div>
+									</div>
+								</div>
+								<div id="setting_keyboard">
+									<div id="setting_keyboard_top">
+									<button id="keyboard_buttonQ" onclick="setButtonClick('Q')">Q</button>
+									<button id="keyboard_buttonW" onclick="setButtonClick('W')">W</button>
+									<button id="keyboard_buttonE" onclick="setButtonClick('E')">E</button>
+									<button id="keyboard_buttonR" onclick="setButtonClick('R')">R</button>
+									<button id="keyboard_buttonT" onclick="setButtonClick('T')">T</button>
+									<button id="keyboard_buttonY" onclick="setButtonClick('Y')">Y</button>
+									<button id="keyboard_buttonU" onclick="setButtonClick('U')">U</button>
+									<button id="keyboard_buttonI" onclick="setButtonClick('I')">I</button>
+									<button id="keyboard_buttonO" onclick="setButtonClick('O')">O</button>
+									<button id="keyboard_buttonP" onclick="setButtonClick('P')">P</button>
+									</div>
+									<div id="setting_keyboard_mid">
+									<button id="keyboard_buttonA" onclick="setButtonClick('A')">A</button>
+									<button id="keyboard_buttonS" onclick="setButtonClick('S')">S</button>
+									<button id="keyboard_buttonD" onclick="setButtonClick('D')">D</button>
+									<button id="keyboard_buttonF" onclick="setButtonClick('F')">F</button>
+									<button id="keyboard_buttonG" onclick="setButtonClick('G')">G</button>
+									<button id="keyboard_buttonH" onclick="setButtonClick('H')">H</button>
+									<button id="keyboard_buttonJ" onclick="setButtonClick('J')">J</button>
+									<button id="keyboard_buttonK" onclick="setButtonClick('K')">K</button>
+									<button id="keyboard_buttonL" onclick="setButtonClick('L')">L</button>	
+									</div>
+									<div id="setting_keyboard_bot">
+									<button id="keyboard_buttonZ" onclick="setButtonClick('Z')">Z</button>
+									<button id="keyboard_buttonX" onclick="setButtonClick('X')">X</button>
+									<button id="keyboard_buttonC" onclick="setButtonClick('C')">C</button>
+									<button id="keyboard_buttonV" onclick="setButtonClick('V')">V</button>
+									<button id="keyboard_buttonB" onclick="setButtonClick('B')">B</button>
+									<button id="keyboard_buttonN" onclick="setButtonClick('N')">N</button>
+									<button id="keyboard_buttonM" onclick="setButtonClick('M')">M</button>
+									</div>
+								</div>
+								<div id="remind_txt_container"></div>
+							</div>
+							<div id="settingmain1-0" class="settingmain" >
+								<div id="tabmsgleft">
+									<div id="tabmsg_set_sound_top" class="tabmsg-txt-weight">音效音量</div>
+									<div id="remindtxt1"  class="tabmsg-txt">调整音符的音效音量</div>
+									<div id="remindtxt2"  class="tabmsg-txt">因为偏移率过高<br>音符音效已关闭</div>
+									<div class="tabmsg-btn-change">
+										<div class="speed-control" id="soundset-l"></div>
+										 <div id="sound" class="setshadow">10%</div>
+										 <div class="speed-control" id="soundset-r"></div>
+									</div>
+								</div>
+								<div id="tabmsgcenter">
+									<div  id="tabmsg_set_offset_top"  class="tabmsg-txt-weight">偏移率</div>
+									<div id="tabmsg_set_offset_mid"   class="tabmsg-txt">调整音乐的同步性</div>
+									<div class="tabmsg-btn-change">
+										<div class="speed-control" id="offset-l"></div>
+										 <div id="offset" class="setshadow">0</div>
+										 <div class="speed-control" id="offset-r"></div>
+									</div>
+									<div id="suggest-offset-rate">
+										<div id="remindtxt3">建议:0</div>
+										<div id="suggestset" onclick="settingOffset()">设定</div>
+									</div>
+								</div>
+								<div id="tabmsgright">
+									<div id="tabmsg_set_preinstall_top"  class="tabmsg-txt-weight">音符预设</div>
+									<div id="tabmsg_set_preinstall_mid" class="tabmsg-txt">点击切换预设项目</div>
+									<div id="tabmsg_set_preinstall_bot" onclick="audio_presetclick()"><img src="../resources/img/dialog_v2/audio_bluetooth.png" id="oneaudio" draggable="false"><img src="../resources/img/dialog_v2/audio_wired.png" id="anotheraudio" draggable="false"></div>
+								</div>
+							</div>
+							<div id="settingmain2-0" class="settingmain">
+								<div id="tabmsgleft">
+									<div id="tabmsg_set_colorsup_top" class="tabmsg-txt-weight">色彩辅助</div>
+									<div id="tabmsg_set_colorsup_mid"class="tabmsg-txt">开启以改变音弧配色</div>
+									<div id="tabmsg_set-colorsup_bot" class="tabmsg-txt-weight tabmsg-txt-shadow" onclick="color_supclick()">关闭</div>
+								</div>
+								<div id="tabmsgcenter">
+									<div id="tabmsg_set_FRPM_top" class="tabmsg-txt-weight">FR/PM指示灯</div>
+									<div id="tabmsg_set_FRPM_mid"class="tabmsg-txt">调整FR/PM<br>指示灯的显示位置</div>
+									<div id="tabmsg_set_FRPM_bot" class="tabmsg-txt-weight tabmsg-txt-shadow" onclick="FRPMclick()">关闭</div>
+								</div>
+								<div id="tabmsgright">
+									<div id="tabmsg_set_eaorla_top" class="tabmsg-txt-weight">【过早/过晚】 位置</div>
+									<div id="tabmsg_set_eaorla_mid" class="tabmsg-txt">调整【过早/过晚】<br>判定的显示位置</div>
+									<div id="tabmsg_set_eaorla_bot" class="tabmsg-txt-weight tabmsg-txt-shadow" onclick="eaorlaclick()">界面中央</div>
+								</div>
+							</div>
+							<div id="settingmain2-1" class="settingmain">
+								<div id="tabmsgleft">
+									<div id="tabmsg_set_mode_top" class="tabmsg-txt-weight">低性能模式</div>
+									<div id="tabmsg_set_mode_mid"class="tabmsg-txt">减少视觉特效<br>适用于入门级设备</div>
+									<div id="tabmsg_set_mode_bot" class="tabmsg-txt-weight tabmsg-txt-shadow" onclick="setmodeclick()">关闭</div>
+								</div>
+								<div id="tabmsgcenter">
+									<div id="tabmsg_set_touch_top"class="tabmsg-txt-weight">触控显示</div>
+									<div id="tabmsg_set_touch_mid" class="tabmsg-txt">显示屏幕的<br>触控视觉效果</div>
+									<div id="tabmsg_set_touch_bot" class="tabmsg-txt-weight tabmsg-txt-shadow" onclick="settouchclick()">关闭</div>
+								</div>
+							</div>
+						</div>
+						<div id="tabmsgto">
+							<div id="tabmsgtolast" onclick="bot_tabmsgclicktolast()"></div><!-- 当前小页面去上一个小页面 -->
+							<div id="tabmsgtonext" onclick="bot_tabmsgclicktonext()"></div><!-- 当前小页面去下一个小页面 -->
+						</div>
+							<div id="exitsetting" onclick="exitsetting()"></div>
+					</div>
+				</div>
+			</div>
+			<div id="chooselabel" style="display: none;">
+				<div id="charshowerimgshadow"></div>
+				<div id="charlistdivmain">
+					<div id="charlistdiv"></div>
+				</div>
+				<div id="charshower">
+					<div id="charshowerimg"></div>
+					<div id="bottombuttons">
+						<div id="tolast" class="bottomarrow" onclick="tolastchar()"></div>
+						<div id="tonext" class="bottomarrow" onclick="tonextchar()"></div>
+						<div id="exitbutton" onclick="exitshower('selectPage')"></div>
+						<div id="skillbutton" onclick="skillclick()">
+							<div id="expline"></div>
+							<div id="skilllock"></div>
+							<div id="offlineskilltext"></div>
+						</div>
+					</div>
+				</div>
+				<div id="chooselabelbtn"></div>
+			</div>
+            <!-- 以上是共有的 -->
+			<div id="page_bg_1" class="page_bg"></div>
+			<div id="page_bg_2" class="page_bg"></div>
+			<div id="containerbottomshadow"></div>
+            <div id="songspackshowermain" style="display: none;">
+			</div>
+			<div id="songspackmsg" onclick="songToPack()" style="display: none;">
+				<!-- 歌曲曲包信息 中间 -->
+				<div id="songspackmsgimg">
+					<div id="packmsgP">PACK</div>
+					<div id="packmsgN">Vicious Labyrinth</div>
+					<div id="packmsgPOS">8/26</div>
+					<div id="packmsgFA" class="packmsgT">2</div><!-- F的数量 中间 -->
+					<div id="packmsgCA" class="packmsgT">6</div><!-- C的数量 中间 -->
+					<div id="packmsgAA" class="packmsgT">/6</div><!-- 一共有多少歌 中间 -->
+				</div>
+			</div>
+            <div id="songsshower" style="display: none;">
+                <div id="songdifmsg">
+                    <!-- 歌曲难度信息 左上角 -->
+					<div id="songdiftab"></div>
+					<div id="diftabimg0" class="diftabimg" onclick="difClick(0)"><div id="diftabT0" class="diftabT">3</div></div>
+					<div id="diftabimg1" class="diftabimg" onclick="difClick(1)"><div id="diftabT1" class="diftabT">7</div></div>
+					<div id="diftabimg2" class="diftabimg" onclick="difClick(2)"><div id="diftabT2" class="diftabT">10+</div></div>
+					<div id="diftabimg3" class="diftabimg" onclick="difClick(3)"><div id="diftabT3" class="diftabT">12</div></div>
+					<div id="songHST">
+						<div id="songHSA">10'842'456</div>
+						<div id="songHSL"></div>
+					</div>
+                </div>
+                <div id="songmsg">
+                    <!-- 歌曲信息 左侧中 -->
+					<div id="songnameS" data-text="inkar-usi">Dement~after legend~</div><!-- 音乐名字 底部阴影 -->
+					<div id="songname" data-text="inkar-usi">Dement~after legend~</div>
+					<div id="authorname" data-text="DIA">DIA</div>
+					<div id="songbpm" data-text="BPM:102">BPM:102</div>
+                </div>
+                <div id="songimglabel">
+					<div id="songimg">
+						<!-- 歌曲图片 中 -->
+						<div id="songimgS">
+							<img src="../resources/img/song_jacket_back_dark.png" id="songimgshadow" draggable="false">
+							<img src="../resources/songs/arcahv/base.jpg" id="songimgimg" draggable="false" onmousedown="songimgclick()">
+							<div id="can_not_play_shadow" class="can_not_play_shadow_light">
+								<img src="../resources/layouts/songselect/song_cell_lock_black.png" id="song_lock_black" draggable="false">
+								<img src="../resources/layouts/songselect/song_cell_lock.png" id="song_lock_light" draggable="false">
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+			<div id="songslistmain" style="display: none;">
+				<!-- 歌曲选择器 右边 -->
+			</div>
+            <div id="rbottombuttons">
+                <div id="backbutton" class="rbuttons" onclick="gotoMainPage()"><div id="rbtext1" class="rbtext">返回</div></div>
+            </div>
+		</div>
+	</body>
+</html>

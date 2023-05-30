@@ -1,0 +1,111 @@
+/* 检查一些重要的本地数据库字段 */
+/*  
+    密码：
+    system->seed=seed_s
+    seed->password=password_s
+    save<<seed_s
+    save<<password_s
+*/
+let key_value = {
+    "data":[
+        {
+            "key":"online",
+            "value_init":"offline",
+            "value_empty":"offline",
+            "init_method":"offlineFunc();",
+            "empty_method":"offlineFunc();"
+        },
+        {
+            "key":"playername",
+            "value_init":"",
+            "value_empty":"",
+            "init_method":"offlineFunc();",
+            "empty_method":"offlineFunc();"
+        },
+        {
+            "key":"playerpassword",
+            "value_init":"",
+            "value_empty":"",
+            "init_method":"offlineFunc();",
+            "empty_method":"offlineFunc();"
+        },
+        {
+            "key":"loginnumber",
+            "value_init":"",
+            "value_empty":"",
+            "init_method":"offlineFunc();",
+            "empty_method":"offlineFunc();"
+        },
+        {
+            "key":"seed",
+            "value_init":"",
+            "value_empty":"",
+            "init_method":"offlineFunc();",
+            "empty_method":"offlineFunc();"
+        },
+        {
+            "key":"playerid",
+            "value_init":"",
+            "value_empty":"",
+            "init_method":"offlineFunc();",
+            "empty_method":"offlineFunc();"
+        },
+        {
+            "key":"language",
+            "value_init":"en",
+            "value_empty":"en",
+            "init_method":"",
+            "empty_method":""
+        },
+        {
+            "key":"charid",
+            "value_init":"1",
+            "value_empty":"1",
+            "init_method":"",
+            "empty_method":""
+        },
+        {
+            "key":"score",
+            "value_init":"0.00",
+            "value_empty":"0.00",
+            "init_method":"offlineFunc();",
+            "empty_method":"offlineFunc();"
+        },
+        {
+            "key":"level",
+            "value_init":0,
+            "value_empty":0,
+            "init_method":"offlineFunc();",
+            "empty_method":"offlineFunc();"
+        },
+        {
+            "key":"fragments",
+            "value_init":0,
+            "value_empty":0,
+            "init_method":"offlineFunc();",
+            "empty_method":"offlineFunc();"
+        },
+        {
+            "key":"memories",
+            "value_init":0,
+            "value_empty":0,
+            "init_method":"offlineFunc();",
+            "empty_method":"offlineFunc();"
+        }
+    ]
+}
+function offlineFunc(){
+    window.localStorage.setItem("online", "offline");
+}
+function localStorageDataCheck(){
+    let l = key_value["data"].length;
+    for(let i = 0;i < l;i++){
+        if(window.localStorage.getItem(key_value["data"][i]["key"])==null){
+            window.localStorage.setItem(key_value["data"][i]["key"], key_value["data"][i]["value_init"]);
+            eval(key_value["data"][i]["init_method"]);
+        }else if(window.localStorage.getItem(key_value["data"][i]["key"])==""){
+            window.localStorage.setItem(key_value["data"][i]["key"], key_value["data"][i]["value_empty"]);
+            eval(key_value["data"][i]["empty_method"]);
+        }
+    }
+}

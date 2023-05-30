@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html id="html">
+	<head>
+		<meta charset="utf-8" user-scalable="no" />
+		<link rel="stylesheet" type="text/css" href="../css/mainPage.css">
+		<link rel="stylesheet" type="text/css" href="../css/shutter.css">
+		<link rel="stylesheet" type="text/css" href="../css/topbar.css">
+		<link rel="stylesheet" type="text/css" href="../css/elements.css">
+		<script src="../js/screen/transition.js?randomId=<%=Math.random()%"></script>
+        <script src="../js/screen/change.js?randomId=<%=Math.random()%"></script>
+        <script src="../js/page/mainPage.js?randomId=<%=Math.random()%"></script>
+		<script src="../js/page/topbar.js?randomId=<%=Math.random()%"></script>
+		<script src="../js/page/waiting.js?randomId=<%=Math.random()%"></script>
+		<script src="../js/page/friends.js?randomId=<%=Math.random()%"></script>
+		<!-- <script src="../js/ingame/delay.js?randomId=<%=Math.random()%"></script> -->
+		<script src="../js/file/jsonFunc.js?randomId=<%=Math.random()%"></script>
+		<script src="../js/data/SAPdata.js?randomId=<%=Math.random()%"></script>
+		<script src="../js/data/XMLConnector.js?randomId=<%=Math.random()%"></script>
+		<script src="../js/scroll/scroll.js?randomId=<%=Math.random()%"></script>
+		<script src="../js/data/localStorage.js?randomId=<%=Math.random()%"></script>
+		<script src="../js/page/prompt.js?randomId=<%=Math.random()%"></script>
+		<script src="../js/data/language.js?randomId=<%=Math.random()%"></script>
+		<script src="../js/data/code.js?randomId=<%=Math.random()%"></script>
+		<script src="../js/data/code_0.js?randomId=<%=Math.random()%"></script>
+		<script src="../js/data/code_1.js?randomId=<%=Math.random()%"></script>
+		<script src="../js/data/code_2.js?randomId=<%=Math.random()%"></script>
+		<script src="../js/data/code_3.js?randomId=<%=Math.random()%"></script>
+		<script src="../js/page/charShower.js?randomId=<%=Math.random()%"></script>
+		<script src="../js/page/clickAudio.js?randomId=<%=Math.random()%"></script>
+		<script src="../js/ingame/delay.js"></script>
+		<title>MusicGame_1.0_menuPage</title>
+	</head>
+	<script>
+		// 禁用返回键
+        window.history.pushState("","","#"); window.addEventListener("popstate",function(e){});
+		window.onpopstate = function(){window.history.pushState({},null,"")};
+    </script>
+	<body id="body" "return false;" onselectstart="return false" 
+	style="background-image: url('../resources/finish/finish.png');" 
+	onload="shutterResize(0), pageinit(), changeSize('mainPage')" onresize="changeSize('mainPage'), shutterResize(1)"
+	onclick="bodyfirstclicked()">
+		<audio id="bgaudio" src="../resources/audio/bgm_full.ogg" preload="auto"></audio>
+		<audio id="shuttercloseaudio" src="../resources/audio/shutter_close.wav" preload="auto"></audio>
+		<audio id="shutteropenaudio" src="../resources/audio/shutter_open.wav" preload="auto"></audio>
+		<audio id="morepageshow" src="../resources/audio/menu_in.wav" preload="auto"></audio>
+		<audio id="morepageleave" src="../resources/audio/item_cancel.wav" preload="auto"></audio>
+		<div id="remind"></div>
+		<div id="shutter" style="display: none;">
+			<div id="shutter_r">
+				<img id="shutter_r_img" src="../resources/img/shutter_r.png" alt="" draggable="false">
+			</div>
+			<div id="shutter_l">
+				<img id="shutter_l_img" src="../resources/img/shutter_l.png" alt="" draggable="false">
+			</div>
+		</div>
+		<div id="container" style="visibility: hidden;">
+			<div id="topbar">
+				<div id="topbarbg"></div>
+				<div id="onlineGrid">
+					<div id="onlineleft">
+						<div id="playerlevelbg">
+							<div id="playername">SakuraYoimiya</div>
+						</div>
+					</div>
+				</div>
+				<div id="playerScore">
+					<div id="onlinescore">
+						<img src="../resources/img/rating_7.png" alt="" id="onlinerateimg" draggable="false">
+						<div id="ratingtextl">
+							<div id="ratingtextm" class="ratingtext" data-text="13.">13.</div>
+							<div id="ratingtexts" class="ratingtext" data-text="00">00</div>
+						</div>
+					</div>
+				</div>
+                <div id="appname" class="testarea">Arcaea</div>
+				<div id="guestGrid" class="testarea">
+					<div id="guestmain" class="topelementsmain">
+						<div id="status_bg">
+							<div id="guest">GUEST</div>
+						</div>
+					</div>
+				</div>
+				<div id="headerBoederGrid" class="testarea">
+					<div id="headerBoeder" onclick="headerclick()">
+						<div id="header"></div>
+					</div>
+				</div>
+				<div id="settingGrid" class="testarea">
+					<div id="setting" onclick="settingclick()">
+						<div id="settingbg">
+							<div id="settingimg"></div>
+							<div id="settingtext">Settings</div>
+						</div>
+					</div>
+				</div>
+				<div id="fragmentstextGrid" class="testarea">
+					<div id="fragmentstext" class="topbartext">Fragments</div>
+				</div>
+				<div id="fragmentsGrid" class="testarea" onclick="showFragPrompt()">
+					<div id="fragmentsmain" class="topelementsmain">
+						<div id="fragments" class="topelements">
+							<div id="fragmentsbg" class="topbarbg"></div>
+						</div>
+						<img src="../resources/layouts/topbar/fragstack-double.png" alt="" id="fragmentsbga" class="topbarbga" draggable="false">
+						<div id="fragmentsamount" class="topbaramount">343</div>
+					</div>
+				</div>
+				<div id="memoriestextGrid" class="testarea">
+					<div id="memoriestext" class="topbartext">Memories</div>
+				</div>
+				<div id="memoriesGrid" class="testarea" onclick="showMemoPrompt()">
+					<div id="memoriesmain" class="topelementsmain">
+						<div id="memories" class="topelements">
+							<div id="memoriesbg" class="topbarbg"></div>
+						</div>
+						<img src="../resources/layouts/topbar/fragstack-doubleplus.png" alt="" id="memoriesbga" class="topbarbga" draggable="false">
+						<div id="memoriesamount" class="topbaramount">343</div>
+					</div>
+				</div>
+            </div>
+			<div id="settingpage"  style="display: none;">
+				<audio src="../resources/audio/calibrate.ogg" preload="auto" id="delayjudgemusic"></audio>
+				<div id="settingpagebg">
+					<div id="settingbgtop">
+						<div id="settingname">Settings</div>
+					</div>
+					<div id="settingbgcenter">
+						<div id="tabbg">
+							<div id="tablabel">
+								<div id="tablabelplay" class="tablabelelement" onclick="tabelementclick(0)"></div>
+								<div id="tablabelmusic" class="tablabelelement" onclick="tabelementclick(1)"></div>
+								<div id="tablabelshow" class="tablabelelement" onclick="tabelementclick(2)"></div>
+							</div>
+							<div id="tabtolast" class="tabto"></div>
+							<div id="tabtonext" class="tabto"></div>
+						</div>
+						<!-- 在这个下面加入你的代码 -->
+						<!-- 下面的div均未设置样式，样式去topbar.css里面更改，更改加在最下面-->
+						<!-- js文件在js/page/topbar.js中更改，大页面切换信息已经写好了，
+							在那个位置（在topbar.js中搜索“边俣”，那行注释下面，之前跟你讲过）加入修改子页面的函数，
+							不要在那个位置下面加一堆语句，就加函数就行，函数写在topbar.js中的最下面
+						-->
+						<div id="tabmsg">
+							<div id="pagelabell" class="pagelabel"><img src="../resources/img/dialog_v2/Pagination_on.png" id="labell0" draggable="false"> <img src="../resources/img/dialog_v2/Pagination_off.png" id="labell1" draggable="false"> </div>
+							<div id="pagelabelr" class="pagelabel"><img src="../resources/img/dialog_v2/Pagination_off.png" id="labelr0" draggable="false"> <img src="../resources/img/dialog_v2/Pagination_on.png" id="labelr1" draggable="false"></div>
+							<div id="settingmain0-0" class="settingmain">
+								<div id="tabmsgleft">
+									<div  id="tabmsg_set_sheer_top" class="tabmsg-txt-weight">纯粹 【过早/过晚】</div>
+									<div id="tabmsg_set_sheer_mid" class="tabmsg-txt">开启后会在纯粹(Pure)时显示【过早/过晚】</div>
+									<div id="tabmsg_set_sheer_bot" class="tabmsg-txt-weight tabmsg-txt-shadow" onclick="pureclick()">关闭</div>
+								</div>
+								<div id="tabmsgcenter">
+									<div  id="tabmsg_set_speed_top" class="tabmsg-txt-weight">音符流速</div>
+									<div id="tabmsg_set_speed_mid" class="tabmsg-txt">控制音符的下落速度</div>
+									<div id="tabmsg_set_speed_bot" class="tabmsg-btn-change">
+										<div class="speed-control" id="speed-l"></div>
+ 										<div id="speed" class="setshadow">4</div>
+ 										<div class="speed-control" id="speed-r"></div>
+									</div>
+								</div>
+								<div id="tabmsgright">
+									<div  id="tabmsg_set_skill_top"  class="tabmsg-txt-weight">技能显示</div>
+									<div  id="tabmsg_set_skill_mid" class="tabmsg-txt">在歌曲开始前<br>显示搭档技能</div>
+									<div id="tabmsg_set_skill_bot" class="tabmsg-txt-weight tabmsg-txt-shadow" onclick="skill_displayclick()">开启</div>
+								</div>
+							</div>
+							<div id="settingmain0-1" class="settingmain" >
+								<div id="button_show_div">
+									<div id="selected_button_div">
+										<button class="keyboard_button_selected" id="selected_button0" onclick="set_keyboard_button(0)">A</button>
+										<button class="keyboard_button_selected" id="selected_button1" onclick="set_keyboard_button(1)">S</button>
+										<button class="keyboard_button_selected" id="selected_button2" onclick="set_keyboard_button(2)">C</button>
+										<button class="keyboard_button_selected" id="selected_button3" onclick="set_keyboard_button(3)">N</button>
+										<button class="keyboard_button_selected" id="selected_button4" onclick="set_keyboard_button(4)">K</button>
+										<button class="keyboard_button_selected" id="selected_button5" onclick="set_keyboard_button(5)">L</button>
+									</div>
+									<div id="num_show_div">
+										<div id="num_show_div1" class="num_show_class">0</div>
+										<div id="num_show_div2"class="num_show_class">1</div>
+										<div id="num_show_div3"class="num_show_class">2</div>
+										<div id="num_show_div4"class="num_show_class">3</div>
+										<div id="num_show_div5"class="num_show_class">4</div>
+										<div id="num_show_div6"class="num_show_class">5</div>
+									</div>
+								</div>
+								<div id="setting_keyboard">
+									<div id="setting_keyboard_top">
+									<button id="keyboard_buttonQ" onclick="setButtonClick('Q')">Q</button>
+									<button id="keyboard_buttonW" onclick="setButtonClick('W')">W</button>
+									<button id="keyboard_buttonE" onclick="setButtonClick('E')">E</button>
+									<button id="keyboard_buttonR" onclick="setButtonClick('R')">R</button>
+									<button id="keyboard_buttonT" onclick="setButtonClick('T')">T</button>
+									<button id="keyboard_buttonY" onclick="setButtonClick('Y')">Y</button>
+									<button id="keyboard_buttonU" onclick="setButtonClick('U')">U</button>
+									<button id="keyboard_buttonI" onclick="setButtonClick('I')">I</button>
+									<button id="keyboard_buttonO" onclick="setButtonClick('O')">O</button>
+									<button id="keyboard_buttonP" onclick="setButtonClick('P')">P</button>
+									</div>
+									<div id="setting_keyboard_mid">
+									<button id="keyboard_buttonA" onclick="setButtonClick('A')">A</button>
+									<button id="keyboard_buttonS" onclick="setButtonClick('S')">S</button>
+									<button id="keyboard_buttonD" onclick="setButtonClick('D')">D</button>
+									<button id="keyboard_buttonF" onclick="setButtonClick('F')">F</button>
+									<button id="keyboard_buttonG" onclick="setButtonClick('G')">G</button>
+									<button id="keyboard_buttonH" onclick="setButtonClick('H')">H</button>
+									<button id="keyboard_buttonJ" onclick="setButtonClick('J')">J</button>
+									<button id="keyboard_buttonK" onclick="setButtonClick('K')">K</button>
+									<button id="keyboard_buttonL" onclick="setButtonClick('L')">L</button>	
+									</div>
+									<div id="setting_keyboard_bot">
+									<button id="keyboard_buttonZ" onclick="setButtonClick('Z')">Z</button>
+									<button id="keyboard_buttonX" onclick="setButtonClick('X')">X</button>
+									<button id="keyboard_buttonC" onclick="setButtonClick('C')">C</button>
+									<button id="keyboard_buttonV" onclick="setButtonClick('V')">V</button>
+									<button id="keyboard_buttonB" onclick="setButtonClick('B')">B</button>
+									<button id="keyboard_buttonN" onclick="setButtonClick('N')">N</button>
+									<button id="keyboard_buttonM" onclick="setButtonClick('M')">M</button>
+									</div>
+								</div>
+								<div id="remind_txt_container"></div>
+							</div>
+							<div id="settingmain1-0" class="settingmain" >
+								<div id="tabmsgleft">
+									<div id="tabmsg_set_sound_top" class="tabmsg-txt-weight">音效音量</div>
+									<div id="remindtxt1"  class="tabmsg-txt">调整音符的音效音量</div>
+									<div id="remindtxt2"  class="tabmsg-txt">因为偏移率过高<br>音符音效已关闭</div>
+									<div class="tabmsg-btn-change">
+										<div class="speed-control" id="soundset-l"></div>
+										 <div id="sound" class="setshadow">10%</div>
+										 <div class="speed-control" id="soundset-r"></div>
+									</div>
+								</div>
+								<div id="tabmsgcenter">
+									<div  id="tabmsg_set_offset_top"  class="tabmsg-txt-weight">偏移率</div>
+									<div id="tabmsg_set_offset_mid"   class="tabmsg-txt">调整音乐的同步性</div>
+									<div class="tabmsg-btn-change">
+										<div class="speed-control" id="offset-l"></div>
+										 <div id="offset" class="setshadow">0</div>
+										 <div class="speed-control" id="offset-r"></div>
+									</div>
+									<div id="suggest-offset-rate">
+										<div id="remindtxt3">建议:0</div>
+										<div id="suggestset" onclick="settingOffset()">设定</div>
+									</div>
+								</div>
+								<div id="tabmsgright">
+									<div id="tabmsg_set_preinstall_top"  class="tabmsg-txt-weight">音符预设</div>
+									<div id="tabmsg_set_preinstall_mid" class="tabmsg-txt">点击切换预设项目</div>
+									<div id="tabmsg_set_preinstall_bot" onclick="audio_presetclick()"><img src="../resources/img/dialog_v2/audio_bluetooth.png" id="oneaudio" draggable="false"><img src="../resources/img/dialog_v2/audio_wired.png" id="anotheraudio" draggable="false"></div>
+								</div>
+							</div>
+							<div id="settingmain2-0" class="settingmain">
+								<div id="tabmsgleft">
+									<div id="tabmsg_set_colorsup_top" class="tabmsg-txt-weight">色彩辅助</div>
+									<div id="tabmsg_set_colorsup_mid"class="tabmsg-txt">开启以改变音弧配色</div>
+									<div id="tabmsg_set-colorsup_bot" class="tabmsg-txt-weight tabmsg-txt-shadow" onclick="color_supclick()">关闭</div>
+								</div>
+								<div id="tabmsgcenter">
+									<div id="tabmsg_set_FRPM_top" class="tabmsg-txt-weight">FR/PM指示灯</div>
+									<div id="tabmsg_set_FRPM_mid"class="tabmsg-txt">调整FR/PM<br>指示灯的显示位置</div>
+									<div id="tabmsg_set_FRPM_bot" class="tabmsg-txt-weight tabmsg-txt-shadow" onclick="FRPMclick()">关闭</div>
+								</div>
+								<div id="tabmsgright">
+									<div id="tabmsg_set_eaorla_top" class="tabmsg-txt-weight">【过早/过晚】 位置</div>
+									<div id="tabmsg_set_eaorla_mid" class="tabmsg-txt">调整【过早/过晚】<br>判定的显示位置</div>
+									<div id="tabmsg_set_eaorla_bot" class="tabmsg-txt-weight tabmsg-txt-shadow" onclick="eaorlaclick()">界面中央</div>
+								</div>
+							</div>
+							<div id="settingmain2-1" class="settingmain">
+								<div id="tabmsgleft">
+									<div id="tabmsg_set_mode_top" class="tabmsg-txt-weight">低性能模式</div>
+									<div id="tabmsg_set_mode_mid"class="tabmsg-txt">减少视觉特效<br>适用于入门级设备</div>
+									<div id="tabmsg_set_mode_bot" class="tabmsg-txt-weight tabmsg-txt-shadow" onclick="setmodeclick()">关闭</div>
+								</div>
+								<div id="tabmsgcenter">
+									<div id="tabmsg_set_touch_top"class="tabmsg-txt-weight">触控显示</div>
+									<div id="tabmsg_set_touch_mid" class="tabmsg-txt">显示屏幕的<br>触控视觉效果</div>
+									<div id="tabmsg_set_touch_bot" class="tabmsg-txt-weight tabmsg-txt-shadow" onclick="settouchclick()">关闭</div>
+								</div>
+							</div>
+						</div>
+						<div id="tabmsgto">
+							<div id="tabmsgtolast" onclick="bot_tabmsgclicktolast()"></div><!-- 当前小页面去上一个小页面 -->
+							<div id="tabmsgtonext" onclick="bot_tabmsgclicktonext()"></div><!-- 当前小页面去下一个小页面 -->
+						</div>
+						<div id="exitsetting" onclick="exitsetting()"></div>
+					</div>
+				</div>
+			</div>
+			<div id="chooselabel" style="display: none;">
+				<div id="charshowerimgshadow"></div>
+				<div id="charlistdivmain">
+					<div id="charlistdiv"></div>
+				</div>
+				<div id="charshower">
+					<div id="charshowerimg"></div>
+					<div id="bottombuttons">
+						<div id="tolast" class="bottomarrow" onclick="tolastchar()"></div>
+						<div id="tonext" class="bottomarrow" onclick="tonextchar()"></div>
+						<img src="../resources/layouts/mainmenu/view_button.png" alt="" draggable="false" id="char_view" onclick="viewCharClick()">
+						<div id="exitbutton" onclick="exitshower('mainPage')"></div>
+						<div id="skillbutton" onclick="skillclick()">
+							<div id="expline"></div>
+							<div id="skilllock"></div>
+							<div id="offlineskilltext"></div>
+						</div>
+					</div>
+				</div>
+				<div id="chooselabelbtn"></div>
+			</div>
+
+            <div id="buttonGroup">
+				<img id="play" src="../resources/layouts/mainmenu/main_musicplay.png" draggable="false" onclick="playButtonClick()"></img>
+				<img id="story" src="../resources/layouts/mainmenu/main_story.png" draggable="false"></img>
+				<img id="net" src="../resources/layouts/mainmenu/main_network.png" draggable="false" onclick="netButtonClick()"></img>
+				<img id="more" src="../resources/layouts/mainmenu/main_more.png" draggable="false" onclick="moreButtonClick()"></img>
+				<img id="composition" src="../resources/layouts/mainmenu/main_course.png" draggable="false" onclick="testCode()"></img>
+				<img id="world" src="../resources/layouts/mainmenu/world.png" draggable="false"></img>
+				<img id="worldtext" src="../resources/layouts/mainmenu/world_text.png" alt="" draggable="false"></img>
+				<img id="resume" src="../resources/layouts/mainmenu/world_resume.png" alt="" draggable="false"></img>
+				<div id="buttonNames">
+					<div id="playname" class="buttonGroupNames"></div>
+					<div id="storyname" class="buttonGroupNames"></div>
+					<div id="morename" class="buttonGroupNames"></div>
+					<div id="compositionname" class="buttonGroupNames"></div>
+				</div>
+            </div>
+            <div id="rightArea">
+				<img id="triangle" src="../resources/img/scenery/bg_triangle.png" alt="" draggable="false">
+				<div id="charimg"></div>
+				<div id="update">
+					<div id="updateshower">
+						<div id="updatemsg"></div>
+					</div>
+					<div id="updatearrow" onclick="updatescrolltonext()"></div>
+				</div>
+            </div>
+			<div id="sceneryselectbutton" onclick="selectBgimgShow()"></div>
+			<div id="sceslabel" onclick="selectBgimgLeave()">
+				<div id="sceneryselectermain">
+					<div id="sceneryselecter">
+						<div id="scenery0" class="sceneryelements">
+							<div class="sceneryborder"></div>
+							<div class="sceneryimg" style="background-image: url('../resources/img/scenery/scenery_default.png');"></div>
+							<div id="scenery0names" class="scenerytext" style="background-image: url('../resources/img/songselect/bg_title_dark_short.png'); opacity: 0.6;">起始之章</div>
+							<div id="scenery0name" class="scenerytext">起始之章</div>
+						</div>
+						<div id="scenery1" class="sceneryelements">
+							<div class="sceneryborder"></div>
+							<div class="sceneryimg" style="background-image: url('../resources/img/scenery/scenery_chap1.png');"></div>
+							<div id="scenery1names" class="scenerytext" style="background-image: url('../resources/img/songselect/bg_title_dark_short.png'); opacity: 0.6;">失落的世界</div>
+							<div id="scenery1name" class="scenerytext">失落的世界</div>
+						</div>
+						<div id="scenery2" class="sceneryelements">
+							<div class="sceneryborder"></div>
+							<div class="sceneryimg" style="background-image: url('../resources/img/scenery/scenery_chap2.png');"></div>
+							<div id="scenery2names" class="scenerytext" style="background-image: url('../resources/img/songselect/bg_title_dark_short.png'); opacity: 0.6;">谜域的界外</div>
+							<div id="scenery2name" class="scenerytext">谜域的界外</div>
+						</div>
+						<div id="scenery3" class="sceneryelements">
+							<div class="sceneryborder"></div>
+							<div class="sceneryimg" style="background-image: url('../resources/img/scenery/scenery_chap3.png');"></div>
+							<div id="scenery3names" class="scenerytext" style="background-image: url('../resources/img/songselect/bg_title_dark_short.png'); opacity: 0.6;">聚合的塔尖</div>
+							<div id="scenery3name" class="scenerytext">聚合的塔尖</div>
+						</div>
+						<div id="scenery4" class="sceneryelements">
+							<div class="sceneryborder"></div>
+							<div class="sceneryimg" style="background-image: url('../resources/img/scenery/scenery_chap4.png');"></div>
+							<div id="scenery4names" class="scenerytext" style="background-image: url('../resources/img/songselect/bg_title_dark_short.png'); opacity: 0.6;">沉眠的回声</div>
+							<div id="scenery4name" class="scenerytext">沉眠的回声</div>
+						</div>
+						<div id="scenery5" class="sceneryelements">
+							<div class="sceneryborder"></div>
+							<div class="sceneryimg" style="background-image: url('../resources/img/scenery/scenery_chap5.png');"></div>
+							<div id="scenery5names" class="scenerytext" style="background-image: url('../resources/img/songselect/bg_title_dark_short.png'); opacity: 0.6;">无央的决裂</div>
+							<div id="scenery5name" class="scenerytext">无央的决裂</div>
+						</div>
+						<div id="scenery6" class="sceneryelements">
+							<div class="sceneryborder"></div>
+							<div class="sceneryimg" style="background-image: url('../resources/img/scenery/scenery_chap6.png');"></div>
+							<div id="scenery6names" class="scenerytext" style="background-image: url('../resources/img/songselect/bg_title_dark_short.png'); opacity: 0.6;">遗忘的构念</div>
+							<div id="scenery6name" class="scenerytext">遗忘的构念</div>
+						</div>
+						<div id="scenery7" class="sceneryelements">
+							<div class="sceneryborder"></div>
+							<div class="sceneryimg" style="background-image: url('../resources/img/scenery/scenery_chap7.png');"></div>
+							<div id="scenery7names" class="scenerytext" style="background-image: url('../resources/img/songselect/bg_title_dark_short.png'); opacity: 0.6;">回首的天际</div>
+							<div id="scenery7name" class="scenerytext">回首的天际</div>
+						</div>
+					</div>
+				</div>
+				<div id="scesbg">
+					<div id="scesname">Select Scenery</div>
+				</div>
+			</div>
+
+			<div id="morediv">
+				<div id="morebottom"></div>
+				<div id="moretop">
+					<div id="more_about">About</div>
+					<div id="more_about_text_main">
+						<div id="more_about_text">
+							<div id="more_about_text_title">制作人员信息</div>
+							<div id="more_about_text_0"></div>
+						</div>
+					</div>
+				</div>
+				<div id="moreldiv"></div>
+				<div id="morerdiv"  onclick="moredivClick()">
+					<div id="moreshadow">
+						<div id="moreshadowtext">More</div>
+					</div>
+					<div id="tutorialbtn" class="MOVEButtonsDisabled">
+						<div id="movebtn1" class="MOVEButtonsText"></div>
+					</div>
+					<div id="languagebtn" class="MOVEButtons" onclick="setLanguage(event)">
+						<div id="movebtn2" class="MOVEButtonsText"></div>
+					</div>
+					<div id="managefile" class="MOVEButtonsDisabled">
+						<div id="movebtn3" class="MOVEButtonsText"></div>
+					</div>
+				</div>
+			</div>
+			<div id="profile_page" onclick="hideProfile()">
+				<div id="profile_lable">
+					<div id="profile_bg"></div>
+					<div id="profile_lable_bg"></div>
+					<div id="profile_score">
+						<img src="../resources/img/rating_3.png" alt="" id="profile_onlinerateimg" draggable="false">
+						<div id="profile_ratingtextl">
+							<div id="profile_ratingtextm" class="profile_ratingtext" data-text=""></div>
+							<div id="profile_ratingtexts" class="profile_ratingtext" data-text=""></div>
+						</div>
+					</div>
+					<div id="profile_username" class="profile_text" data-text=""></div>
+					<div id="profile_userid" class="profile_text" data-text=""></div>
+					<div id="profile_dif_bg" class="profile_FTR" data-text="FTR" onclick="changeProfileDif(event)">FTR</div>
+					<div id="profile_msg">
+						<div id="profile_clear_amount" class="profile_amount">135/313</div>
+						<div id="profile_full_amount" class="profile_amount">37/313</div>
+						<div id="profile_pure_amount" class="profile_amount">1/313</div>
+						<div id="profile_clear" class="profile_type">CLEAR</div>
+						<div id="profile_full" class="profile_type">FULL RECALL</div>
+						<div id="profile_pm" class="profile_type">PURE MEMORY</div>
+					</div>
+				</div>
+				<div id="profile_char"></div>
+			</div>
+			<div id="netdiv">
+				<div id="netbottom"></div>
+				<div id="nettop">
+					<div id="nettop_logged">
+						<div class="signnet">
+							<div class="nettext" id="networktext">Network</div>
+							<div class="netimg"><img src="../resources/layouts/mainmenu/network/network_dash.png" draggable="false"></div>
+						</div>
+						<div id="playerinfoshow">
+							<div id="playernameshow">SakuraYoimiya</div>
+							<div id="playeridshow">ID:055 091 227</div>
+							<div id="playerfriendshow">0/10 好友</div>
+						</div>
+						<div id="optionnet">
+							<div id="addfriends">
+								<div id="friendbtn-one" class="optionnet-text1" onclick="addFriendButtonClick()"><p>添加</p></div>
+								<div id="friendbtn-two"></div>
+							</div>
+							<div id="net-files" class="optionnet-text1" onclick="showProfile()"><p>档案</p></div>
+							<div id="net-cloud" class="optionnet-text1" onclick="cloudClick()"><p>云端同步</p></div>
+							<div id="net-two-btn">
+								<div id="num-manage" class="optionnet-text2" onclick="accmountManagement()">账号管理</div>
+								<div id="ex-code" class="optionnet-text2">兑换码</div>
+							</div>
+						</div>
+					</div>
+					<div id="nettop_unlogged">
+						<div class="signnet">
+							<div class="nettext" id="networktext">Network</div>
+							<div class="netimg"><img src="../resources/layouts/mainmenu/network/network_dash.png" draggable="false"></div>
+						</div>
+						<div id="log-sign">
+							<div id="user_log" class="log-sign-bottons" onclick="user_logClick()"><p>登入</p></div>
+							<div id="user_sign" class="log-sign-bottons" onclick="user_signClick()"><p>注册</p></div>
+						</div>
+						<div id="log-sign-remindtext">
+							<div id="log-sign-remindtext1"><p>登录来获取新故事包、添加好友<br>或使用在线功能</p></div>
+							<div id="log-sign-remindtext2">
+								<p>记忆源点与故事包是与账号绑定的<br>使用「云端存储」可以保存解锁数据与离线分数</p>
+							</div>
+						</div>
+					</div>
+					<div id="nettop_log">
+						<div class="signnet">
+							<div class="nettext" id="net_logintext">Login</div>
+							<div class="netimg"><img src="../resources/layouts/mainmenu/network/network_dash.png" draggable="false"></div>
+						</div>
+						<div id="user_inputbox">
+							<div id="user_nameinput">
+								<input class="userinput" type="text" id="username" name="username" placeholder="Username" maxlength="20" minlength="6" onkeyup="value=value.replace(/[^a-zA-Z0-9]/g,'')" autocomplete='off'>
+								<div id="inputline1"></div>
+							</div>
+							<div id="user_passwordinput">
+								<input  class="userinput" type="password" id="password" name="userpassword" placeholder="Password" maxlength="20" minlength="6" onkeyup="value=value.replace(/[^a-zA-Z0-9]/g,'')" autocomplete='off'>
+								<div id="inputline2"></div>
+							</div>
+						</div>
+						<div id="user_log_btn">
+							<div id="logbtn" onclick="playerLogin()"><p>登入</p></div>
+							<div id="login_error"></div>
+						</div>
+					</div>
+					<div id="nettop_sign">
+						<div class="signnet">
+							<div class="nettext" id="networktext">Register</div>
+							<div class="netimg"><img src="../resources/layouts/mainmenu/network/network_dash.png" draggable="false"></div>
+						</div>
+						<div id="signbox">
+							<div id="sign_passwordinput">
+								<input class="userinput" type="password" id="sign_password" name="sign_password" placeholder="Password" maxlength="16" minlength="6" onkeyup="value=value.replace(/[^a-zA-Z0-9]/g,'')" autocomplete='off' required>
+								<div class="inputline"></div>
+							</div>
+							<div id="sign_passwordinput_confirm">
+								<input class="userinput" type="password" id="sign_password_confirm" name="sign_passwordinput_confirm" placeholder="Password(confirm)" maxlength="16" minlength="6" onkeyup="value=value.replace(/[^a-zA-Z0-9]/g,'')" autocomplete='off' required>
+								<div class="inputline"></div>
+							</div>
+							<div id="sign_nameinput">
+								<input  class="userinput" type="text" id="sign_username" name="sign_username" placeholder="Username" maxlength="18" minlength="6" onkeyup="value=value.replace(/[^a-zA-Z0-9]/g,'')" autocomplete='off' required>
+								<div class="inputline"></div>
+							</div>
+							<div id="sign_error"></div>
+							<div id="account_button" onclick="playerRegister()"><p>创建账号</p></div>
+						</div>
+					</div>
+				</div>
+				<div id="netrightdiv" >
+					<div id="netright_logged">
+						<div id="friendclickdiv" onclick="netdivClick()">
+							<div id="friendfloat"></div>
+							<div id="friendtext" class="nettext">Friends</div>
+						</div>
+						<div id="netfrienddivbase" class="netfrienddiv">
+							<div id="netfrienddivson"></div>
+						</div>
+					</div>
+					<div id="netright_other" onclick="netdivClick()">
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

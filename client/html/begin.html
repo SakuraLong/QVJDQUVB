@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html id="html">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="../css/begin.css">
+		<link rel="stylesheet" type="text/css" href="../css/shutter.css">
+		<link rel="stylesheet" type="text/css" href="../css/elements.css">
+        <script src="../js/page/begin.js"></script>
+		<script src="../js/screen/transition.js"></script>
+        <script src="../js/screen/change.js"></script>
+		<script src="../js/data/localStorage.js"></script>
+		<script src="../js/page/waiting.js"></script>
+		<script src="../js/data/XMLConnector.js"></script>
+		<script src="../js/data/code.js"></script>
+		<script src="../js/data/code_0.js"></script>
+		<script src="../js/data/code_1.js"></script>
+		<script src="../js/data/code_2.js"></script>
+		<script src="../js/data/code_3.js"></script>
+		<title>MusicGame_1.0_begin</title>
+	</head>
+	
+	<body id="body"  "return false;" onselectstart="return false"
+	onload="shutterResize(2)" onresize="shutterResize(1)"> 
+        <div id="clickpage1" class=""  onclick="wasd()">
+			<div id="signword" style="font-size:50px" class="">点击以进入<br>Click to Enter</div>
+		</div>
+		<audio id="shuttercloseaudio" src="../resources/audio/shutter_close.wav" preload="auto"></audio>
+		<div id="shutter" style="display: none;">
+			<div id="shutter_r">
+				<img id="shutter_r_img" src="../resources/img/shutter_r.png" alt="" draggable="false">
+			</div>
+			<div id="shutter_l">
+				<img id="shutter_l_img" src="../resources/img/shutter_l.png" alt="" draggable="false">
+			</div>
+		</div>
+        <div id="container" class="" onclick="entergame()" >
+			<audio src="../resources/audio/in_epilogue_full.ogg" id="onemusic" preload="auto"></audio>
+			<div id="first_cir" class="">
+				<div id="test2"></div>
+				<img id="onepic" src="../resources/startup/start_icon.png"></img>
+			</div>
+			<div id="threepics" class="">
+				<img id="firpic" src="../resources/startup/epilogue/e1.png"></img>
+				<img id="secpic" src="../resources/startup/epilogue/e2.png"></img>
+				<img id="thrpic" src="../resources/startup/epilogue/e3.png"></img>
+			
+			
+			</div>
+			<div id="logo1" class="">
+                <img id="fourpic0" class="fourpic" src="../resources/startup/title.png"></img>
+				<img id="fourpic1" class="fourpic" src="../resources/startup/title_glow.png"></img>
+			</div>
+			<div id="logo2" class="" >
+				<img id="finalpic0" src="../resources/startup/epilogue_reunion.png"></img>
+				<div id="whiteboard" ></div>
+
+			</div>
+			<div id="logo3" class="">
+				<img id="glasspic0" src="../resources/startup/main_glass.png" ></img>
+				<img id="glasspic1" src="../resources/startup/main_glass.png" ></img>
+			</div>
+        </div>
+	</body>
+</html>

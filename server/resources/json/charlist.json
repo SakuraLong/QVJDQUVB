@@ -1,0 +1,229 @@
+{
+    "char":[
+        {
+            "id":0,
+            "idx":"0",
+            "idn":"hikari",
+            "dif": 0,
+            "hp":0,
+            "name_localized": {
+                "en": "Hikari",
+                "zh-Hans": "光"
+            },
+            "namelittle_localized": {
+                "en": "",
+                "zh-Hans": ""
+            },
+            "description_localized": {
+                "en": "EASY-Recollection Rate loss redused for LOST notes",
+                "zh-Hans": "光是好角色"
+            },
+            "top":"0%",
+            "bgy":"0%",
+            "frag":[],
+            "step":[],
+            "over":[],
+            "type":"SUPPORT"
+        },
+        {
+            "id":1,
+            "idx":"55",
+            "idn":"hikarifatalis",
+            "dif": 2,
+            "hp":3,
+            "name_localized": {
+                "en": "Hikari",
+                "zh-Hans": "光"
+            },
+            "namelittle_localized": {
+                "en": "Fatalis",
+                "zh-Hans": "Fatalis"
+            },
+            "description_localized": {
+                "en": "HARD-Fatails Gauge + sacrifices stamina to overload World Mode",
+                "zh-Hans": "光是好角色"
+            },
+            "top":"-10%",
+            "bgy":"20%",
+            "frag":[],
+            "step":[],
+            "over":[],
+            "type":"CREATOR"
+        },
+        {
+            "id":2,
+            "idx":"15",
+            "idn":"hikarifracture",
+            "dif": 1,
+            "hp":0,
+            "name_localized": {
+                "en": "Hikari",
+                "zh-Hans": "光"
+            },
+            "namelittle_localized": {
+                "en": "Fracture",
+                "zh-Hans": "Fracture"
+            },
+            "description_localized": {
+                "en": "EASY-Recollection Rate loss redused for LOST notes",
+                "zh-Hans": "光是好角色"
+            },
+            "top":"0%",
+            "bgy":"0%",
+            "frag":[],
+            "step":[],
+            "over":[],
+            "type":"CREATOR"
+        },
+        {
+            "id":3,
+            "idx":"14",
+            "idn":"hikarizero",
+            "dif": 2,
+            "hp":0,
+            "name_localized": {
+                "en": "Hikari",
+                "zh-Hans": "光"
+            },
+            "namelittle_localized": {
+                "en": "Zero",
+                "zh-Hans": "Zero"
+            },
+            "description_localized": {
+                "en": "EASY-Recollection Rate loss redused for LOST notes",
+                "zh-Hans": "光是好角色"
+            },
+            "top":"0%",
+            "bgy":"0%",
+            "frag":[],
+            "step":[],
+            "over":[],
+            "type":"CHALLENGE"
+        },
+        {
+            "id":4,
+            "idx":"1",
+            "idn":"tairitsu",
+            "dif": 1,
+            "hp":0,
+            "name_localized": {
+                "en": "Tairitsu",
+                "zh-Hans": "对立"
+            },
+            "namelittle_localized": {
+                "en": "",
+                "zh-Hans": ""
+            },
+            "description_localized": {
+                "en": "EASY-Recollection Rate loss redused for LOST notes",
+                "zh-Hans": "光是好角色"
+            },
+            "top":"0%",
+            "bgy":"0%",
+            "frag":[],
+            "step":[],
+            "over":[],
+            "type":"BALANCE"
+        },
+        {
+            "id":5,
+            "idx":"6",
+            "idn":"tairitsuaxium",
+            "dif": 1,
+            "hp":0,
+            "name_localized": {
+                "en": "Tairitsu",
+                "zh-Hans": "对立"
+            },
+            "namelittle_localized": {
+                "en": "Axium",
+                "zh-Hans": "Axium"
+            },
+            "description_localized": {
+                "en": "EASY-Recollection Rate loss redused for LOST notes",
+                "zh-Hans": "光是好角色"
+            },
+            "top":"0%",
+            "bgy":"0%",
+            "frag":[],
+            "step":[],
+            "over":[],
+            "type":"BALANCE"
+        },
+        {
+            "id":6,
+            "idx":"7",
+            "idn":"tairitsugrievouslady",
+            "dif": 2,
+            "hp":3,
+            "name_localized": {
+                "en": "Tairitsu",
+                "zh-Hans": "对立"
+            },
+            "namelittle_localized": {
+                "en": "Grievous Lady",
+                "zh-Hans": "Grievous Lady"
+            },
+            "description_localized": {
+                "en": "HARD-Track Lost when Recollection Rate reaches 0%",
+                "zh-Hans": "光是好角色"
+            },
+            "top":"0%",
+            "bgy":"0%",
+            "frag":[],
+            "step":[],
+            "over":[],
+            "type":"CHALLENGE"
+        },
+        {
+            "id":7,
+            "idx":"35",
+            "idn":"tairitsutempest",
+            "dif": 2,
+            "hp":3,
+            "name_localized": {
+                "en": "Tairitsu",
+                "zh-Hans": "对立"
+            },
+            "namelittle_localized": {
+                "en": "Tempest",
+                "zh-Hans": "Tempest"
+            },
+            "description_localized": {
+                "en": "HARD-Track Lost when Recollection Rate reaches 0%",
+                "zh-Hans": "光是好角色"
+            },
+            "top":"-15%",
+            "bgy":"10%",
+            "frag":[],
+            "step":[],
+            "over":[],
+            "type":"CHALLENGE"
+        },
+        {
+            "id":8,
+            "idx":"2u",
+            "idn":"kou",
+            "dif": 1,
+            "hp":1,
+            "name_localized": {
+                "en": "Kou",
+                "zh-Hans": "红"
+            },
+            "namelittle_localized": {
+                "en": "",
+                "zh-Hans": ""
+            },
+            "description_localized": {
+                "en": "EASY-Recollection Rate loss redused for LOST notes",
+                "zh-Hans": "光是好角色"
+            },
+            "top":"0%",
+            "bgy":"0%",
+            "frag":[],
+            "step":[],
+            "over":[],
+            "type":"BALANCE"
+        }
+    ]
+}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html id="html">
+	<head>
+		<meta charset="utf-8" user-scalable="no" />
+		<link rel="stylesheet" type="text/css" href="../css/scorePage.css">
+		<link rel="stylesheet" type="text/css" href="../css/shutter.css">
+		<link rel="stylesheet" type="text/css" href="../css/topbar.css">
+		<link rel="stylesheet" type="text/css" href="../css/elements.css">
+		<link rel="stylesheet" type="text/css" href="../css/hp.css">
+		<script src="../js/screen/transition.js"></script>
+        <script src="../js/screen/change.js"></script>
+        <script src="../js/page/scorePage.js"></script>
+		<script src="../js/page/topbar.js"></script>
+		<script src="../js/file/jsonFunc.js"></script>
+		<script src="../js/page/waiting.js"></script>
+		<script src="../js/page/prompt.js"></script>
+		<script src="../js/page/hp.js"></script>
+		<script src="../js/data/SAPdata.js"></script>
+		<script src="../js/data/language.js"></script>
+		<script src="../js/scroll/scroll.js"></script>
+		<script src="../js/data/localStorage.js"></script>
+		<script src="../js/data/XMLConnector.js"></script>
+		<script src="../js/data/code.js"></script>
+		<script src="../js/data/code_0.js"></script>
+		<script src="../js/data/code_1.js"></script>
+		<script src="../js/data/code_2.js"></script>
+		<script src="../js/data/code_3.js"></script>
+		<script src="../node_modules/moment/moment.js"></script>
+		<script src="../js/page/clickAudio.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js?randomId=<%=Math.random()%"></script>
+		<title>MusicGame_1.0_scorePage</title>
+	</head>
+	<body id="body"  "return false;" onselectstart="return false" 
+	style="background-image: url('../resources/finish/finish.png');" 
+	onload="shutterResize(0), pageinit(), changeSize('scorePage')" onresize="changeSize('scorePage'), shutterResize(1)"
+	onclick="bodyFirstClicked()">
+		<audio id="bgaudio" src="../resources/audio/res_full.ogg" preload="auto"></audio>
+		<audio id="shuttercloseaudio" src="../resources/audio/shutter_close.wav" preload="auto"></audio>
+		<audio id="shutteropenaudio" src="../resources/audio/shutter_open.wav" preload="auto"></audio>
+		<audio id="morepageshow" src="../resources/audio/menu_in.wav" preload="auto"></audio>
+		<audio id="morepageleave" src="../resources/audio/item_cancel.wav" preload="auto"></audio>
+		<div id="remind"></div>
+		<div id="shutter" style="display: none;">
+			<div id="shutter_r">
+				<img id="shutter_r_img" src="../resources/img/shutter_r.png" alt="" draggable="false">
+			</div>
+			<div id="shutter_l">
+				<img id="shutter_l_img" src="../resources/img/shutter_l.png" alt="" draggable="false">
+			</div>
+		</div>
+		<div id="container" style="visibility: hidden;">
+			<div id="topbar">
+				<div id="topbarbg"></div>
+				<div id="onlineGrid">
+					<div id="onlineleft">
+						<div id="playerlevelbg">
+							<div id="playername">SakuraYoimiya</div>
+						</div>
+					</div>
+				</div>
+				<div id="playerScore">
+					<div id="onlinescore">
+						<img src="../resources/img/rating_7.png" alt="" id="onlinerateimg">
+						<img src="../resources/img/rating_7.png" alt="" id="onlinerateimg_score_only">
+						<div id="ratingtextl">
+							<div id="ratingtextm" class="ratingtext" data-text="13.">13.</div>
+							<div id="ratingtexts" class="ratingtext" data-text="00">00</div>
+						</div>
+					</div>
+				</div>
+                <div id="appname" class="testarea">Arcaea</div>
+				<div id="guestGrid" class="testarea">
+					<div id="guestmain" class="topelementsmain">
+						<div id="status_bg">
+							<div id="guest">GUEST</div>
+						</div>
+					</div>
+				</div>
+				<div id="headerBoederGrid" class="testarea" style="pointer-events: none;">
+					<div id="headerBoeder" onclick="headerclick()">
+						<div id="header"></div>
+					</div>
+				</div>
+				<div id="settingGrid" class="testarea" style="display: none">
+					<div id="setting" onclick="settingclick()">
+						<div id="settingbg">
+							<div id="settingimg"></div>
+							<div id="settingtext">Settings</div>
+						</div>
+					</div>
+				</div>
+				<div id="fragmentstextGrid" class="testarea">
+					<div id="fragmentstext" class="topbartext">Fragments</div>
+				</div>
+				<div id="fragmentsGrid" class="testarea" onclick="showFragPrompt()" style="pointer-events: none;">
+					<div id="fragmentsmain" class="topelementsmain">
+						<div id="fragments" class="topelements">
+							<div id="fragmentsbg" class="topbarbg"></div>
+						</div>
+						<img src="../resources/layouts/topbar/fragstack-double.png" alt="" id="fragmentsbga" class="topbarbga" draggable="false">
+						<div id="fragmentsamount" class="topbaramount">343</div>
+						<div id="fragmentsamount_" class="topbaramount" data-text="">343</div>
+						<!-- 只有此界面有 -->
+					</div>
+				</div>
+				<div id="memoriestextGrid" class="testarea">
+					<div id="memoriestext" class="topbartext">Memories</div>
+				</div>
+				<div id="memoriesGrid" class="testarea" onclick="showMemoPrompt()" style="pointer-events: none;">
+					<div id="memoriesmain" class="topelementsmain">
+						<div id="memories" class="topelements">
+							<div id="memoriesbg" class="topbarbg"></div>
+						</div>
+						<img src="../resources/layouts/topbar/fragstack-doubleplus.png" alt="" id="memoriesbga" class="topbarbga" draggable="false">
+						<div id="memoriesamount" class="topbaramount">343</div>
+					</div>
+				</div>
+				<!-- 结算界面存在ppt的结果 -->
+				<div id="topbarptt">
+					<img src="../resources/layouts/results/keeptext.png" draggable="false" id="topbarkeeptext">
+					<img src="../resources/layouts/results/potentialtext.png" draggable="false" id="topnarptttext">
+					<div id="topbarchangeamount" data-text="+0.01" class="topbarchangeamountup">+0.01</div>
+				</div>
+            </div>
+			
+			<div id="centerbg"></div>
+
+            <div id="centercontainer">
+				<div id="authorname">TeddyLoid feat. DELTA</div>
+				<div id="result"></div>
+                <div id="difficult">Futrue 9+</div>
+				<div id="songname">Defection</div>
+                <div id="maxrecall">MAX RECALL
+					<div id="maxamount">103</div>
+				</div>
+                <div id="centerlabel">
+                    <div id="resultlabel">
+                        <div id="resultbg">
+                            <div id="score" class="rscore">09'654'899</div>
+                            <div id="hishscore" class="rscore">09'569'552</div>
+							<div id="changescore" class="rscore">-00'085'347</div>
+                            <div id="level"></div>
+                        </div>
+						<div id="purelabel" class="rslabel">
+                            <div id="puretext" data-text="PURE" class="rsimg">PURE</div>
+                            <div id="pureamount" data-text="1024" class="rstext" onclick="showDetailScore()">1024</div>
+                        </div>
+                        <div id="farlabel" class="rslabel">
+                            <div id="fartext" data-text="FAR" class="rsimg">FAR</div>
+                            <div id="faramount" data-text="1024" class="rstext">1024</div>
+                        </div>
+                        <div id="lostlabel" class="rslabel">
+                            <div id="losttext" data-text="LOST" class="rsimg">LOST</div>
+                            <div id="lostamount" data-text="1024" class="rstext">1024</div>
+                        </div>
+						<div id="score_detail">
+							<div id="score_detail_pure" data-text="+1141" class="detext">+1141</div>
+							<div id="score_detail_EOL" data-text="L0 E0" class="detext">L0 E0</div>
+						</div>
+                    </div>
+					<img src="../resources/songs/arcahv/base.jpg" alt="" id="songimg" draggable="false">
+                </div>
+            </div>
+
+            <div id="rightArea">
+				<div id="charimg"></div>
+                <div id="rewardlabel" onclick="SOHlabel()">
+					<div id="rewardbg"></div>
+                    <div id="reward">
+						<div id="rewardimg">
+							<div id="reward_title">REWARD</div>
+							<div id="reward_frag">FRAGMENTS</div>
+							<div id="reward_amount">3</div>
+						</div>
+					</div>
+                    <div id="partner"></div>
+                </div>
+            </div>
+
+            <div id="rbottombuttons"><div id="rtext1"></div>
+                <div id="backbutton" class="rbuttons" onclick="backToSelect()"><div id="rbtext1" class="rbtext">返回</div></div>
+                <div id="sharebutton" class="rbuttons" onclick="screenshot()"><div id="rbtext2" class="rbtext">分享</div></div>
+                <div id="replaybutton" class="rbuttons"><div id="rbtext3" class="rbtext">重试</div></div>
+            </div>
+		</div>
+	</body>
+</html>

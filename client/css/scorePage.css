@@ -1,0 +1,796 @@
+@font-face{
+	font-family: 'Kazesawa-Regular';
+	src : url('../resources/fonts/Kazesawa-Regular.ttf');
+}
+@font-face{
+	font-family: 'Kazesawa-Light';
+	src : url('../resources/fonts/Kazesawa-Light.ttf');
+}
+#html{
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	background-image: url('../resources/finish/finish.png');
+	background-size: cover;
+	background-position: 0px -15px;
+	background-repeat: no-repeat;
+}
+#body{
+    margin: 0px;
+	width: 100%;
+	height: 100%;
+	min-width: 500px;
+	min-height: 300px;
+	background-size: cover;
+	background-position: 0px -15px;
+	background-repeat: no-repeat;
+	display: flex;
+	justify-content: center;/* 水平居中*/
+	align-items: center;/* 垂直居中*/
+}
+#container{
+	position: absolute;
+	left: 0%;
+	width: 0%;
+	margin: 0px;
+	background-image: url('../resources/img/scenery/scenery_bg_default.png');
+	background-size: cover;
+	background-repeat:no-repeat;
+	background-attachment: fixed;
+	background-position: top;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;/* 水平居中*/
+	align-items: center;/* 垂直居中*/
+    overflow: hidden;
+}
+@font-face{
+	font-family: 'GeosansLight';
+	src : url('../resources/fonts/GeosansLight.ttf');
+}
+@font-face{
+	font-family: 'Kazesawa-Regular';
+	src : url('../resources/fonts/Kazesawa-Regular.ttf');
+}
+@font-face{
+	font-family: 'GeosansLight-Oblique';
+	src : url('../resources/fonts/GeosansLight-Oblique.ttf');
+}
+#rightArea{
+	pointer-events: all;
+    /* border: 1px solid red; */
+	position: absolute;
+	right: -10%;
+	top: 0%;
+	width: 70%;
+	height: 100%;
+	overflow: hidden;
+    z-index: 1;
+}
+#charimg{
+	position: absolute;
+	right: -5%;
+	top: 0%;
+	width: 100%;
+	height: 0;
+	padding-bottom: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 100px 20px;
+	animation: charimgMoving;
+	animation-duration: 15s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-timing-function: linear;
+}
+@keyframes charimgMoving {
+	from{
+		background-position: 100px 20px;
+	}
+	to{
+		background-position: 100px 60px;
+	}
+}
+@keyframes charimgshow {
+	from{
+		opacity: 0;
+		right: -3%;
+	}
+	to{
+		opacity: 1;
+		right: 0%;
+	}
+}
+#rewardlabel{
+	width: 400px;
+	height: 300px;
+	position: absolute;
+	right: 9%;
+	bottom: 8%;
+	/* border: 1px solid red; */
+	
+	animation: nonenone;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+	animation-timing-function: ease-out;
+}
+@keyframes rewardlabelin {
+	from{
+		right: 0%;
+		opacity: 0;
+	}to{
+		right: 9%;
+		opacity: 1;
+	}
+}
+@keyframes rewardlabelout {
+	from{
+		right: 9%;
+		opacity: 1;
+	}to{
+		right: 0%;
+		opacity: 0;
+	}
+}
+#reward{
+	/* border: 1px solid red; */
+	position: absolute;
+	right: 0%;
+	bottom: 0%;
+	width: 300px;
+	height: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#rewardbg{
+	/* border: 1px solid red; */
+	position: absolute;
+	right: 0%;
+	bottom: 0%;
+	width: 300px;
+	height: 300px;
+	background-image: url("../resources/layouts/results/reward_bg.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	animation: rewardbgani;
+	animation-duration: 2s;
+	animation-timing-function: ease-out;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+@keyframes rewardbgani {
+	from{
+		opacity: 0;
+	}to{
+		opacity: 1;
+	}
+}
+#rewardimg{
+	/* border: 1px solid red; */
+	position: relative;
+	width: 257px;
+	height: 257px;
+	background-image: url("../resources/layouts/results/reward_front.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	color: white;
+	display: flex;
+	justify-content: center;
+	font-family: 'Kazesawa-Light';
+}
+#reward_title{
+	position: absolute;
+	font-size: 26px;
+	font-weight: 100;
+	bottom: 66.5%;
+}
+#reward_frag{
+	position: absolute;
+	font-size: 16px;
+	font-weight: 600;
+	bottom: 22%;
+	letter-spacing: 0.8px;
+}
+#reward_amount{
+	position: absolute;
+	bottom: 6%;
+	font-size: 33px;
+}
+#partner{
+	/* border: 1px solid red; */
+	position: absolute;
+	right: 53.3%;
+	bottom: 9.3%;
+	width: 125px;
+	height: 125px;
+	background-image: url("../resources/layouts/results/character_reward.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+#centerbg{
+    position: absolute;
+    top: 7%;
+    width: 100%;
+    height: 90%;
+    z-index: 0;
+    background-image: url("../resources/layouts/results/res_banner.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+	opacity: 0.9;
+}
+#centercontainer{
+	pointer-events: none;
+    position: absolute;
+    top: 7%;
+    width: 100%;
+    height: 90%;
+    z-index: 2;
+    display: flex;
+    justify-content: center;/* 水平居中*/
+	align-items: center;/* 垂直居中*/
+}
+.titletext{
+    color: white;
+    font-family: "Kazesawa-Regular";
+    /* text-shadow: 2px 2px black; */
+	border: 1px solid red;
+}
+#songname{
+	color: white;
+    text-align: center;
+    position: absolute;
+    top: 1%;
+    width: 100%;
+    height: 10%;
+    font-size: 45px;
+	text-shadow: 2px 2px black;
+}
+#authorname{
+	color: white;
+    text-align: center;
+    position: absolute;
+    top: 11%;
+    width: 100%;
+    height: 8%;
+    font-size: 25px;
+	text-shadow: 2px 2px black;
+}
+#result{
+	display: none;
+    position: absolute;
+    top: 22%;
+    width: 100%;
+    height: 9%;
+    background-image: url("../resources/img/clear_pure.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+	animation: nonenone;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+	animation-timing-function: ease-out;
+}
+@keyframes resultin {
+	from{
+		opacity: 0;
+		scale: 1.1;
+	}to{
+		opacity: 1;
+		scale: 1;
+	}
+}
+#maxrecall{
+	width: 20%;
+	height: 6%;
+	/* border: 1px solid red; */
+	position: absolute;
+	left: 10%;
+	top: 21%;
+	font-family: "Kazesawa-Regular";
+	font-size: 25px;
+	font-weight: 500;
+	color: rgb(88, 88, 89);
+	/* text-shadow: 1px 1px rgba(0, 0, 0, 0.5); */
+}
+#maxamount{
+	position: absolute;
+	left: 55%;
+	top: 0%;
+	font-weight: 600;
+	text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+#difficult{
+	width: 10%;
+	height: 6%;
+	/* border: 1px solid red; */
+	position: absolute;
+	left: 10%;
+	top: 27%;
+	font-family: "Kazesawa-Regular";
+	font-size: 25px;
+	font-weight: 500;
+	/* color: rgb(87, 27, 144); */
+	text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+.difficult_pst{
+	color: rgb(5, 161, 197);
+}
+.difficult_prs{
+	color: rgb(131, 189, 30);
+}
+.difficult_ftr{
+	color: rgb(87, 27, 144);
+}
+.difficult_byd{
+	color: rgb(160, 6, 6);
+}
+#centerlabel{
+	pointer-events: none;
+    position: relative;
+    top: 13%;
+    right: 13%;
+    width: 830px;
+    height: 380px;
+    /* background-color: rgb(255, 255, 255); */
+	overflow: hidden;
+}
+#songimg{
+	position: absolute;
+	left: 0%;
+	height: 97%;
+}
+#hplabel{
+    /* float: right; */
+    position: absolute;
+	top: 0%;
+	left: 355px;
+    width: 57px;
+    height: 380px;
+	/* padding-bottom: 25%; */
+	z-index: 1;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+}
+#hpborder{
+	position: absolute;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-image: url("../resources/img/hp_bar_fatalis_overlay.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	z-index: 2;
+}
+#hpamount{
+	position: absolute;
+	left: 24.5%;
+	top: 10%;
+	width: 50%;
+	height: 6%;
+	color: white;
+	font-family: "Kazesawa-Regular";
+	font-size: 15px;
+	font-weight: 600;
+	z-index: 70;
+	text-align: center;
+	text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 0px 1px black, 0px -1px black, 1px 0px black, -1px 0px black;
+	/* border: 1px solid blue; */
+}
+#hp{
+	position: absolute;
+	left: 25%;
+	bottom: 3%;
+	width: 50%;
+	height: 87%;
+	background-image: url("../resources/img/hp_bar_hard.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: bottom;
+	/* background-clip: ; */
+}
+#hpshadow{
+	visibility: hidden;
+	position: absolute;
+	left: 25%;
+	bottom: 3%;
+	width: 50%;
+	height: 97%;
+	background-image: url("../resources/layouts/ingame/hp_grid.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: bottom;
+	/* background-color: rgb(255, 0, 51); */
+}
+#hpshadowfatalis{
+	/* visibility: hidden; */
+	position: absolute;
+	left: 25%;
+	bottom: 3%;
+	width: 50%;
+	height: 97%;
+	background-image: url("../resources/img/hp_bar_fatalis_grid.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: bottom;
+	z-index: 1;
+}
+#hppetalsfatalis{
+	position: absolute;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-image: url("../resources/img/hp_bar_fatalis_petals.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	z-index: 3;
+}
+#hpmissingfatalis{
+	position: absolute;
+	left: 25%;
+	bottom: 3%;
+	width: 50%;
+	height: 67%;
+	background-image: url("../resources/img/hp_bar_fatalis_missing.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: bottom;
+	z-index: 4;
+}
+#hpoutlinefatalis{
+	position: absolute;
+	left: 3%;
+	bottom: 67%;
+	width: 92%;
+	height: 30%;
+	background-image: url("../resources/img/hp_bar_fatalis_bottom_outline.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: bottom;
+	z-index: 4;
+}
+#resultlabel{
+	position: absolute;
+	right: 0%;
+    width: 52.1%;
+	height: 100%;
+    /* background-color: aliceblue; */
+}
+#resultbg{
+	width: 100%;
+	height: 56%;
+	background-image: url("../resources/layouts/results/res_scoresection.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.rscore{
+	color: white;
+	font-family: "GeosansLight";
+	text-align: center;
+	text-shadow: 3px 3px black;
+
+	animation: nonenone;
+	animation-duration: 0.5s;
+	animation-timing-function: ease-out;
+	animation-fill-mode: forwards;
+}
+
+@keyframes Hrscorein {
+	from{
+		left: 44%;
+		opacity: 0;
+	}to{
+		left: 39%;
+		opacity: 1;
+	}
+}
+@keyframes Crscorein {
+	from{
+		left: 80%;
+		opacity: 0;
+	}to{
+		left: 75%;
+		opacity: 1;
+	}
+}
+#score{
+	position: absolute;
+	top: 3%;
+	width: 100%;
+	height: 15%;
+	font-size: 60px;
+	line-height: 100%;
+	/* border: 1px solid red; */
+}
+#hishscore{
+	display: none;
+	text-shadow: 2px 2px black;
+	position: absolute;
+	top: 21%;
+	left: 39%;
+	width: 30%;
+	height: 7.5%;
+	/* border: 1px solid red; */
+	font-size: 21px;
+	font-weight: 600;
+	line-height: 100%;
+    justify-content: center;/* 水平居中*/
+	align-items: center;/* 垂直居中*/
+}
+#changescore{
+	display: none;
+	text-shadow: 2px 2px black;
+	text-align: left;
+	position: absolute;
+	top: 23%;
+	left: 75%;
+	width: 30%;
+	height: 6%;
+	/* border: 1px solid red; */
+	font-size: 17px;
+	font-weight: 600;
+	line-height: 100%;
+}
+#level{
+	display: none;
+	position: absolute;
+	top: 31%;
+	left: 32%;
+	width: 33%;
+	height: 20%;
+	/* border: 1px solid red; */
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-image: url("../resources/img/grade/c.png");
+	animation: nonenone;
+	animation-duration: 0.3s;
+	animation-timing-function: ease-out;
+	animation-fill-mode: forwards;
+}
+@keyframes levelin {
+	0%{
+		opacity: 0;
+		scale: 3;
+	}30%{
+		opacity: 0.1;
+		scale: 2.4;
+	}100%{
+		opacity: 1;
+		scale: 1;
+	}
+}
+#score_detail{
+	display: none;
+	position: absolute;
+	width: 30%;
+	height: 19.5%;
+	/* border: 1px solid red; */
+	left: 68%;
+	top: 61%;
+	animation: nonenone;
+	animation-duration: 0.3s;
+	animation-timing-function: ease-out;
+	animation-fill-mode: forwards;
+}
+@keyframes detail_in {
+	0%{
+		opacity: 0;
+		left: 78%;
+	}100%{
+		opacity: 1;
+		left: 68%;
+	}
+}
+#score_detail_pure{
+	position: absolute;
+	top: 0%;
+}
+#score_detail_EOL{
+	position: absolute;
+	bottom: 0%;
+}
+.rslabel{
+	position: absolute;
+	left: 28%;
+	/* border: 1px solid red; */
+	width: 40%;
+	height: 9%;
+}
+.rsimg{
+	position: absolute;
+	left: -5%;
+	width: 50%;
+	height: 100%;
+	font-family: "Kazesawa-Regular";
+	font-size: 22px;
+	font-weight: 500;
+	display: flex;
+    justify-content: right;/* 水平居中*/
+	align-items: center;/* 垂直居中*/
+	text-align: right;
+	color: rgb(126, 126, 126);
+	/* line-height: 100%; */
+}
+.rsimgS{
+	position: absolute;
+	left: -5%;
+	width: 50%;
+	height: 100%;
+	font-family: "Kazesawa-Regular";
+	font-size: 22px;
+	font-weight: 500;
+	display: flex;
+    justify-content: right;/* 水平居中*/
+	align-items: center;/* 垂直居中*/
+	text-align: right;
+	color: rgb(255, 255, 255);
+	-webkit-text-stroke:5px rgb(255, 255, 255);
+}
+.rsi1mg::before{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	content: attr(data-text);
+	display: flex;
+    justify-content: right;/* 水平居中*/
+	align-items: center;/* 垂直居中*/
+	text-align: right;
+	z-index: -1;
+}
+.rsim1g::before{
+	-webkit-text-stroke:5px rgb(255, 255, 255);
+}
+#puretext{
+	color: #02ccff;
+}
+.rstext{
+	position: absolute;
+	left: 50%;
+	width: 50%;
+	height: 100%;
+	color: rgb(126, 126, 126);
+	font-family: "GeosansLight-Oblique";
+	font-size: 30px;
+	font-weight: 500;
+	text-align: left;
+}
+.detext{
+	position: relative;
+	font-family: "GeosansLight-Oblique";
+	font-size: 22px;
+	font-weight: 500;
+	text-align: left;
+	color: rgb(126, 126, 126);
+}
+.detext::before{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	content: attr(data-text);
+	text-align: left;
+	z-index: -1;
+	-webkit-text-stroke:4px rgb(255, 255, 255);
+}
+.rstextS{
+	position: absolute;
+	left: 50%;
+	width: 50%;
+	height: 100%;
+	color: rgb(255, 255, 255);
+	font-family: "GeosansLight-Oblique";
+	font-size: 30px;
+	font-weight: 500;
+	text-align: left;
+	-webkit-text-stroke:4px rgb(255, 255, 255);
+}
+.rstext::before{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	content: attr(data-text);
+	text-align: left;
+	z-index: -1;
+}
+.rstext::before{
+	-webkit-text-stroke:4px rgb(255, 255, 255);
+}
+#pureamount{
+	font-family: "GeosansLight";
+	pointer-events: all;
+}
+#pureamountS{
+	font-family: "GeosansLight";
+}
+#purelabel{
+	top: 60%;
+}
+#farlabel{
+	top: 72%;
+}
+#lostlabel{
+	top: 84%;
+}
+#rbottombuttons{
+	position: absolute;
+	bottom: 0%;
+	left: 0%;
+	width: 100%;
+	height: 8%;
+	/* border: 1px solid red; */
+	z-index: 5;
+	display: flex;
+	justify-content: center;/* 水平居中*/
+	align-items: center;/* 垂直居中*/
+	animation: nonenone;
+	animation-duration: 0.5s;
+	animation-timing-function: ease-out;
+	animation-fill-mode: forwards;
+}
+@keyframes rbottombuttonsin {
+	from{
+		opacity: 0;
+		bottom: -5%;
+	}to{
+		opacity: 1;
+		bottom: 0%;
+	}
+}
+.rbuttons{
+	position: absolute;
+	bottom: 0%;
+	color: rgb(79, 79, 79);
+	height: 100%;
+	width: 12%;
+	/* border: 1px solid red; */
+	background-repeat: no-repeat;
+	background-size: contain;
+	display: flex;
+	justify-content: center;/* 水平居中*/
+	align-items: center;/* 垂直居中*/
+}
+.rbtext{
+	position: relative;
+	top: -10%;
+	width: 50%;
+	height: 50%;
+	/* border: 1px solid red; */
+	color: rgb(80, 52, 82);
+	font-family: "Kazesawa-Regular";
+	font-size: 20px;
+	font-weight: 900;
+	text-align: center;
+}
+#rbtext1{
+	left: -5%;
+}
+#rbtext3{
+	right: -5%;
+}
+#backbutton{
+	left: 0%;
+	background-image: url("../resources/layouts/results/back.png");
+	background-position: left bottom;
+}
+#backbutton:hover{
+	background-image: url("../resources/layouts/results/back_pressed.png");
+}
+#replaybutton{
+	right: 0%;
+	background-image: url("../resources/layouts/results/back_r.png");
+	background-position: right bottom;
+}
+#replaybutton:hover{
+	background-image: url("../resources/layouts/results/back_pressed_r.png");
+}
+#sharebutton{
+	width: 14%;
+	background-image: url("../resources/layouts/results/mid_button.png");
+	background-position: center bottom;
+}
+#sharebutton:hover{
+	background-image: url("../resources/layouts/results/mid_button_pressed.png");
+}

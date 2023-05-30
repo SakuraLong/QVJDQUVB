@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html id="html">
+	<head>
+		<meta charset="utf-8" user-scalable="no">
+		<title>MusicGame_1.0_playingPage</title>
+		<link rel="stylesheet" type="text/css" href="../css/ingame/note.css">
+		<link rel="stylesheet" type="text/css" href="../css/playing.css">
+		<link rel="stylesheet" type="text/css" href="../css/shutter.css">
+		<link rel="stylesheet" type="text/css" href="../css/hp.css">
+		<link rel="stylesheet" type="text/css" href="../css/elements.css">
+		<script src="../js/screen/transition.js"></script>
+		<script src="../js/data/localStorage.js"></script>
+		<script src="../js/data/SAPdata.js"></script>
+		<script src="../js/file/jsonFunc.js"></script>
+		<script src="../js/file/txtFunc.js"></script>
+		<script src="../js/page/playing.js"></script>
+		<script src="../js/screen/change.js"></script>
+		<script src="../js/ingame/gamecore.js"></script>
+		<script src="../js/ingame/hitshower.js"></script>
+		<script src="../js/ingame/partner.js"></script>
+		<script src="../js/ingame/gameCoreNew.js"></script>
+		<script src="../js/ingame/gameElements.js"></script>
+		<script src="../js/ingame/particle.js"></script>
+		<script src="../js/page/clickAudio.js"></script>
+		<script src="../js/data/language.js"></script>
+		<script src="../js/page/hp.js"></script>
+		<script src="../js/data/code.js"></script>
+		<script src="../js/data/code_0.js"></script>
+		<script src="../js/data/code_1.js"></script>
+		<script src="../js/data/code_2.js"></script>
+		<script src="../js/data/code_3.js"></script>
+		<script src="../js/particle/info.js"></script>
+		<script src="../js/particle/ppo.min.js"></script>
+		<script src="../js/particle/proton.min.js"></script>
+		<script src="../js/particle/stats.min.js"></script>
+		<script src="../js/particle/TweenLite.min.js"></script>
+	</head>
+	<body id="body" "return false;" onselectstart="return false" onload="shutterResize(0), pageInit()"
+	onclick="bodyfirstclicked()">
+		<audio id="shuttercloseaudio" src="../resources/audio/shutter_close.wav" preload="auto"></audio>
+		<audio id="shutteropenaudio" src="../resources/audio/shutter_open.wav" preload="auto"></audio>
+		<audio id="gameingaudio" src="" preload="auto"></audio>
+		<div id="remind"></div>
+		<div id="shutter" style="display: none;">
+			<div id="shutter_r">
+				<img id="shutter_r_img" src="../resources/img/shutter_r.png" alt="" draggable="false">
+			</div>
+			<div id="shutter_l">
+				<img id="shutter_l_img" src="../resources/img/shutter_l.png" alt="" draggable="false">
+			</div>
+			<!-- 游玩界面专属 -->
+			<img src="../resources/img/songload_shadow.png" id="shutter_song_shadow" draggable="false">
+			<div id="shutter_song_msg">
+				<div id="shutter_songimgS">
+					<img src="../resources/img/song_jacket_back_dark.png" id="shutter_songimgshadow" draggable="false">
+					<img src="../resources/songs/arcahv/base.jpg" id="shutter_songimgimg" draggable="false">
+				</div>
+				<div id="shutter_song_game_data">
+					<div id="shutter_song_game_data_music">
+						<div class="shutter_song_game_data_title">Music</div>
+						<div id="shutter_song_game_data_music_by" class="shutter_song_game_data_content">Cosmograph</div>
+					</div>
+					<div id="shutter_song_game_data_design">
+						<div class="shutter_song_game_data_title">Note Design</div>
+						<div id="shutter_song_game_data_design_by" class="shutter_song_game_data_content">Toaster</div>
+					</div>
+				</div>
+				<div id="shutter_song_name">
+					<div id="shutter_songnameS" class="shutter_songname">Dement~after legend~</div><!-- 音乐名字 底部阴影 -->
+					<div id="shutter_songname" class="shutter_songname">Dement~after legend~</div>
+				</div>
+			</div>
+		</div>
+		<div id="container">
+			<div id="PAHP">
+				<div id="pauselabel"></div>
+			</div>
+			<div id="game_frame" style="color:red;position: absolute;z-index: 60;">12000</div>
+			<div id="pausepage">
+				<div id="pausetext">PAUSED</div>
+				<div class="pausepagebuttons" id="presume"><div class="pausepagetexts" id="presumet">Resume</div></div>
+				<div class="pausepagebuttons" id="pretry"><div class="pausepagetexts" id="pretryt">Retry</div></div>
+				<div class="pausepagebuttons" id="pquit"><div class="pausepagetexts" id="pquitt">Quit</div></div>
+			</div>
+			<div id="timetest"></div>
+			<div id="timetest2"></div>
+			<img src="" alt="" id="gamingbgimg">
+			<div id="gamingcontainer">
+				<div id="gaming3d">
+					<div id="track">
+						<div id="bg4k"></div>
+						<!-- <div id="secondsLine"></div> -->
+						<div id="BLine" class="bline"></div>
+						<div id="bg6kl" class="bg6k">
+							<div id="bg6klBLine" class="extra_bline"></div>
+							<img id="track6kl" class="trackline" src="" alt="">
+						</div>
+						<div id="bg6kr" class="bg6k">
+							<div id="bg6krBLine" class="extra_bline"></div>
+							<img id="track6kr" class="trackline" src="" alt="">
+						</div>
+						<img id="trackl" class="trackline" src="" alt="">
+						<img id="trackc" class="trackline" src="" alt="">
+						<img id="trackr" class="trackline" src="" alt="">
+						<div id="lane0" class="laneshadow"></div>
+						<div id="lane1" class="laneshadow"></div>
+						<div id="lane2" class="laneshadow"></div>
+						<div id="lane3" class="laneshadow"></div>
+						<div id="lane4" class="laneshadow"></div>
+						<div id="lane5" class="laneshadow"></div>
+					</div>
+					<div id="particlelabel">
+						<div id="particle0" class="particle"></div>
+						<div id="particle1" class="particle"></div>
+						<div id="particle2" class="particle"></div>
+						<div id="particle3" class="particle"></div>
+						<div id="particle4" class="particle"></div>
+						<div id="particle5" class="particle"></div>
+					</div>
+				</div>
+				<div id="hitshowerlabel">
+
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
